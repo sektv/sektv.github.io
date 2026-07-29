@@ -173,6 +173,27 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .nav-cta::after { display: none !important; }
 .nav-cta:hover { background: #333; transform: translateY(-1px); color: var(--white) !important; }
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+  background: none;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+  font-family: var(--font);
+}
+.lang-toggle:hover {
+  border-color: var(--text);
+  background: var(--bg-alt);
+}
+.lang-toggle .globe { font-size: 14px; line-height: 1; }
 
 /* ── Hero ── */
 .hero {
@@ -644,7 +665,70 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  const saved = localStorage.getItem('sektv_lang');
+  if (saved) setLang(saved);
 });
+const i18n = {
+  en: {
+    'nav.shop': 'Shop', 'nav.why': 'Why Us', 'nav.store': 'Visit Store',
+    'hero.eyebrow': 'Premium Digital Accounts', 'hero.title1': 'Digital', 'hero.title2': 'Essentials',
+    'hero.sub': 'Curated selection of premium digital accounts and professional web services. Delivered instantly.',
+    'hero.btn': 'Explore Collection',
+    'stats.cats': 'Categories', 'stats.prods': 'Products', 'stats.opts': 'Options', 'stats.del': 'Delivery',
+    'collection.title': 'The Collection', 'collection.desc': 'Browse our curated selection of premium digital accounts and services',
+    'filter.all': 'All', 'filter.gv': 'GV Numbers', 'filter.gmail': 'Gmail', 'filter.apple': 'Apple ID', 'filter.svc': 'Services',
+    'cat.gv': 'GV Numbers', 'cat.gmail': 'Gmail', 'cat.apple': 'Apple ID', 'cat.svc': 'Services',
+    'feat.deli.title': 'Instant Delivery', 'feat.deli.desc': 'Automated delivery system ensures you receive your accounts immediately after purchase',
+    'feat.qual.title': 'Premium Quality', 'feat.qual.desc': 'Every account is verified and guaranteed. Free replacement during warranty period',
+    'feat.price.title': 'Best Prices', 'feat.price.desc': 'Direct sourcing means no middlemen. We offer the most competitive prices available',
+    'feat.custom.title': 'Custom Selection', 'feat.custom.desc': 'Choose specific numbers and account details to match your exact requirements',
+    'cta.title': 'Ready to Get Started?', 'cta.desc': 'Premium digital accounts delivered instantly. Trusted by thousands of customers worldwide.',
+    'cta.btn': 'Shop Now',
+    'footer.brand': 'Your trusted source for premium digital accounts and professional web services.',
+    'footer.links': 'Quick Links', 'footer.store': 'Visit Store', 'footer.browse': 'Browse Products', 'footer.why': 'Why Choose Us',
+    'footer.support': 'Support', 'footer.contact': 'Contact Us', 'footer.faq': 'FAQ', 'footer.rights': 'All rights reserved.',
+    'announce': '★ Instant Delivery on All Orders ★ Premium Quality Guaranteed ★ 24/7 Customer Support ★ Best Prices Online',
+  },
+  zh: {
+    'nav.shop': '商品', 'nav.why': '优势', 'nav.store': '进入商城',
+    'hero.eyebrow': '优质数字账号', 'hero.title1': '精选', 'hero.title2': '数字资源',
+    'hero.sub': '严选优质数字账号与专业网站服务，一站式解决，即买即用。',
+    'hero.btn': '浏览全部',
+    'stats.cats': '分类', 'stats.prods': '商品', 'stats.opts': '规格', 'stats.del': '发货',
+    'collection.title': '全部商品', 'collection.desc': '浏览我们严选的优质数字账号与服务',
+    'filter.all': '全部', 'filter.gv': 'GV靓号', 'filter.gmail': '谷歌邮箱', 'filter.apple': '苹果ID', 'filter.svc': '服务类',
+    'cat.gv': 'GV靓号', 'cat.gmail': '谷歌邮箱', 'cat.apple': '苹果ID', 'cat.svc': '服务类',
+    'feat.deli.title': '即时发货', 'feat.deli.desc': '付款后自动发货，无需等待人工处理',
+    'feat.qual.title': '品质保障', 'feat.qual.desc': '每个账号均经过验证，质保期内免费更换',
+    'feat.price.title': '源头价格', 'feat.price.desc': '一手资源直供，无中间商差价，价格更优',
+    'feat.custom.title': '可选靓号', 'feat.custom.desc': '支持自选号码和账号详情，精准匹配需求',
+    'cta.title': '找到你需要的账号了吗？', 'cta.desc': '优质数字账号即买即用，数千用户信赖之选。',
+    'cta.btn': '立即购买',
+    'footer.brand': '您值得信赖的优质数字账号与专业网站服务平台。',
+    'footer.links': '快速链接', 'footer.store': '进入商城', 'footer.browse': '浏览商品', 'footer.why': '为什么选择我们',
+    'footer.support': '客户支持', 'footer.contact': '联系我们', 'footer.faq': '常见问题', 'footer.rights': '保留所有权利。',
+    'announce': '★ 全场即时发货 ★ 品质保障 ★ 24小时在线客服 ★ 超值优惠价格',
+  }
+};
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('sektv_lang', lang);
+  const t = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  const marqueeSpans = document.querySelectorAll('.announce-bar .marquee span');
+  const announceText = t['announce'];
+  marqueeSpans.forEach(s => s.textContent = announceText);
+  const label = document.getElementById('lang-label');
+  if (label) label.textContent = lang === 'en' ? '中文' : 'EN';
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+}
+function toggleLang() {
+  setLang(currentLang === 'en' ? 'zh' : 'en');
+}
 `;
 
 function main() {
@@ -802,7 +886,7 @@ function main() {
   </div>
 
   <div class="filter-bar">
-    <button class="filter-btn active" onclick="filterCategory('all', this)">All</button>
+    <button class="filter-btn active" onclick="filterCategory('all', this)" data-i18n="filter.all">All</button>
     ${catBtns}
   </div>
 

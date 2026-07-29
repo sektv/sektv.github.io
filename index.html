@@ -153,6 +153,27 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .nav-cta::after { display: none !important; }
 .nav-cta:hover { background: #333; transform: translateY(-1px); color: var(--white) !important; }
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+  background: none;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+  font-family: var(--font);
+}
+.lang-toggle:hover {
+  border-color: var(--text);
+  background: var(--bg-alt);
+}
+.lang-toggle .globe { font-size: 14px; line-height: 1; }
 
 /* ── Hero ── */
 .hero {
@@ -624,9 +645,10 @@ img { max-width: 100%; height: auto; display: block; }
       </a>
     </div>
     <div class="nav-links">
-      <a href="#products">Shop</a>
-      <a href="#features">Why Us</a>
-      <a href="https://hltx.cc.cd" target="_blank" rel="noopener" class="nav-cta">Visit Store</a>
+      <a href="#products" data-i18n="nav.shop">Shop</a>
+      <a href="#features" data-i18n="nav.why">Why Us</a>
+      <a href="https://hltx.cc.cd" target="_blank" rel="noopener" class="nav-cta" data-i18n="nav.store">Visit Store</a>
+      <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language"><span class="globe">🌐</span><span id="lang-label">中文</span></button>
     </div>
   </div>
 </nav>
@@ -636,35 +658,35 @@ img { max-width: 100%; height: auto; display: block; }
   <div class="hero-bg" style="background-image:url('https://fengzi.eu.org/image/07f005d6-068f-4328-a90c-dad528e9f52a.webp')"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow">Premium Digital Accounts</div>
-    <h1>Digital<br><em>Essentials</em></h1>
-    <p class="hero-sub">Curated selection of premium digital accounts and professional web services. Delivered instantly.</p>
-    <a href="#products" class="hero-btn">Explore Collection</a>
+    <div class="hero-eyebrow" data-i18n="hero.eyebrow">Premium Digital Accounts</div>
+    <h1><span data-i18n="hero.title1">Digital</span><br><em data-i18n="hero.title2">Essentials</em></h1>
+    <p class="hero-sub" data-i18n="hero.sub">Curated selection of premium digital accounts and professional web services. Delivered instantly.</p>
+    <a href="#products" class="hero-btn" data-i18n="hero.btn">Explore Collection</a>
   </div>
 </section>
 
 <!-- Stats -->
 <div class="stats-strip">
-  <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Categories</div></div>
-  <div class="stat-item"><div class="stat-num">9</div><div class="stat-label">Products</div></div>
-  <div class="stat-item"><div class="stat-num">74</div><div class="stat-label">Options</div></div>
-  <div class="stat-item"><div class="stat-num">24h</div><div class="stat-label">Delivery</div></div>
+  <div class="stat-item"><div class="stat-num">4</div><div class="stat-label" data-i18n="stats.cats">Categories</div></div>
+  <div class="stat-item"><div class="stat-num">9</div><div class="stat-label" data-i18n="stats.prods">Products</div></div>
+  <div class="stat-item"><div class="stat-num">74</div><div class="stat-label" data-i18n="stats.opts">Options</div></div>
+  <div class="stat-item"><div class="stat-num">24h</div><div class="stat-label" data-i18n="stats.del">Delivery</div></div>
 </div>
 
 <!-- Products Section -->
 <div id="products">
   <div class="section-header">
-    <h2>The Collection</h2>
-    <p>Browse our curated selection of premium digital accounts and services</p>
+    <h2 data-i18n="collection.title">The Collection</h2>
+    <p data-i18n="collection.desc">Browse our curated selection of premium digital accounts and services</p>
     <div class="section-line"></div>
   </div>
 
   <div class="filter-bar">
-    <button class="filter-btn active" onclick="filterCategory('all', this)">All</button>
-    <button class="filter-btn" onclick="filterCategory(1, this)">GV Numbers</button>
-    <button class="filter-btn" onclick="filterCategory(2, this)">Gmail</button>
-    <button class="filter-btn" onclick="filterCategory(3, this)">Apple ID</button>
-    <button class="filter-btn" onclick="filterCategory(4, this)">Services</button>
+    <button class="filter-btn active" onclick="filterCategory('all', this)" data-i18n="filter.all">All</button>
+    <button class="filter-btn" onclick="filterCategory(1, this)" data-i18n="filter.gv">GV Numbers</button>
+    <button class="filter-btn" onclick="filterCategory(2, this)" data-i18n="filter.gmail">Gmail</button>
+    <button class="filter-btn" onclick="filterCategory(3, this)" data-i18n="filter.apple">Apple ID</button>
+    <button class="filter-btn" onclick="filterCategory(4, this)" data-i18n="filter.svc">Services</button>
   </div>
 
   <section class="products-section">
@@ -677,8 +699,8 @@ img { max-width: 100%; height: auto; display: block; }
             <div class="card-badge">AAA</div>
           </div>
           <div class="card-body">
-            <div class="card-cat">GV Numbers</div>
-            <div class="card-title">GoogleVoice /GV Premium Number (Transfer)</div>
+            <div class="card-cat" data-i18n="cat.gv">GV Numbers</div>
+            <div class="card-title" data-i18n="p1.title">GoogleVoice /GV Premium Number (Transfer)</div>
             <div class="card-footer">
               <div class="card-price"><span class="from">from </span>¥120.88</div>
               <div class="card-cta">→</div>
@@ -692,8 +714,8 @@ img { max-width: 100%; height: auto; display: block; }
             <div class="card-badge">US/JP/KR</div>
           </div>
           <div class="card-body">
-            <div class="card-cat">Apple ID</div>
-            <div class="card-title">Apple ID — US / Japan / Korea / HK / Taiwan / China</div>
+            <div class="card-cat" data-i18n="cat.apple">Apple ID</div>
+            <div class="card-title" data-i18n="p2.title">Apple ID — US / Japan / Korea / HK / Taiwan / China</div>
             <div class="card-footer">
               <div class="card-price"><span class="from">from </span>¥12.88</div>
               <div class="card-cta">→</div>
@@ -707,8 +729,8 @@ img { max-width: 100%; height: auto; display: block; }
             <div class="card-badge">Tax-Free</div>
           </div>
           <div class="card-body">
-            <div class="card-cat">GV Numbers</div>
-            <div class="card-title">GoogleVoice /GV Tax-Free Premium Number</div>
+            <div class="card-cat" data-i18n="cat.gv">GV Numbers</div>
+            <div class="card-title" data-i18n="p3.title">GoogleVoice /GV Tax-Free Premium Number</div>
             <div class="card-footer">
               <div class="card-price"><span class="from">from </span>¥59.99</div>
               <div class="card-cta">→</div>
@@ -722,8 +744,8 @@ img { max-width: 100%; height: auto; display: block; }
             <div class="card-badge">AAA</div>
           </div>
           <div class="card-body">
-            <div class="card-cat">GV Numbers</div>
-            <div class="card-title">GoogleVoice /GV AAA Vanity Number</div>
+            <div class="card-cat" data-i18n="cat.gv">GV Numbers</div>
+            <div class="card-title" data-i18n="p4.title">GoogleVoice /GV AAA Vanity Number</div>
             <div class="card-footer">
               <div class="card-price"><span class="from">from </span>¥49.99</div>
               <div class="card-cta">→</div>
@@ -737,8 +759,8 @@ img { max-width: 100%; height: auto; display: block; }
             <div class="card-badge">AAABCCC</div>
           </div>
           <div class="card-body">
-            <div class="card-cat">GV Numbers</div>
-            <div class="card-title">GoogleVoice /GV AAABCCC Vanity Number</div>
+            <div class="card-cat" data-i18n="cat.gv">GV Numbers</div>
+            <div class="card-title" data-i18n="p5.title">GoogleVoice /GV AAABCCC Vanity Number</div>
             <div class="card-footer">
               <div class="card-price"><span class="from">from </span>¥52.88</div>
               <div class="card-cta">→</div>
@@ -752,8 +774,8 @@ img { max-width: 100%; height: auto; display: block; }
             <div class="card-badge">Aged</div>
           </div>
           <div class="card-body">
-            <div class="card-cat">Gmail</div>
-            <div class="card-title">Gmail Premium Aged Account</div>
+            <div class="card-cat" data-i18n="cat.gmail">Gmail</div>
+            <div class="card-title" data-i18n="p6.title">Gmail Premium Aged Account</div>
             <div class="card-footer">
               <div class="card-price"><span class="from">from </span>¥8.88</div>
               <div class="card-cta">→</div>
@@ -767,8 +789,8 @@ img { max-width: 100%; height: auto; display: block; }
             <div class="card-badge">Pure Number</div>
           </div>
           <div class="card-body">
-            <div class="card-cat">Gmail</div>
-            <div class="card-title">Gmail Pure Number Account</div>
+            <div class="card-cat" data-i18n="cat.gmail">Gmail</div>
+            <div class="card-title" data-i18n="p7.title">Gmail Pure Number Account</div>
             <div class="card-footer">
               <div class="card-price"><span class="from">from </span>¥19.88</div>
               <div class="card-cta">→</div>
@@ -782,8 +804,8 @@ img { max-width: 100%; height: auto; display: block; }
             <div class="card-badge">3AAA</div>
           </div>
           <div class="card-body">
-            <div class="card-cat">Gmail</div>
-            <div class="card-title">Gmail 3AAA Pure Number Account</div>
+            <div class="card-cat" data-i18n="cat.gmail">Gmail</div>
+            <div class="card-title" data-i18n="p8.title">Gmail 3AAA Pure Number Account</div>
             <div class="card-footer">
               <div class="card-price"><span class="from">from </span>¥51.88</div>
               <div class="card-cta">→</div>
@@ -797,8 +819,8 @@ img { max-width: 100%; height: auto; display: block; }
             <div class="card-badge">Lifetime</div>
           </div>
           <div class="card-body">
-            <div class="card-cat">Services</div>
-            <div class="card-title">Custom Image Hosting — Lifetime Free Setup</div>
+            <div class="card-cat" data-i18n="cat.svc">Services</div>
+            <div class="card-title" data-i18n="p9.title">Custom Image Hosting — Lifetime Free Setup</div>
             <div class="card-footer">
               <div class="card-price"><span class="from">from </span>¥12.88</div>
               <div class="card-cta">→</div>
@@ -817,23 +839,23 @@ img { max-width: 100%; height: auto; display: block; }
     <div class="features-grid">
       <div class="feature-item reveal">
         <div class="feature-icon">⚡</div>
-        <h3>Instant Delivery</h3>
-        <p>Automated delivery system ensures you receive your accounts immediately after purchase</p>
+        <h3 data-i18n="feat.deli.title">Instant Delivery</h3>
+        <p data-i18n="feat.deli.desc">Automated delivery system ensures you receive your accounts immediately after purchase</p>
       </div>
       <div class="feature-item reveal">
         <div class="feature-icon">◆</div>
-        <h3>Premium Quality</h3>
-        <p>Every account is verified and guaranteed. Free replacement during warranty period</p>
+        <h3 data-i18n="feat.qual.title">Premium Quality</h3>
+        <p data-i18n="feat.qual.desc">Every account is verified and guaranteed. Free replacement during warranty period</p>
       </div>
       <div class="feature-item reveal">
         <div class="feature-icon">$</div>
-        <h3>Best Prices</h3>
-        <p>Direct sourcing means no middlemen. We offer the most competitive prices available</p>
+        <h3 data-i18n="feat.price.title">Best Prices</h3>
+        <p data-i18n="feat.price.desc">Direct sourcing means no middlemen. We offer the most competitive prices available</p>
       </div>
       <div class="feature-item reveal">
         <div class="feature-icon">◎</div>
-        <h3>Custom Selection</h3>
-        <p>Choose specific numbers and account details to match your exact requirements</p>
+        <h3 data-i18n="feat.custom.title">Custom Selection</h3>
+        <p data-i18n="feat.custom.desc">Choose specific numbers and account details to match your exact requirements</p>
       </div>
     </div>
   </div>
@@ -841,9 +863,9 @@ img { max-width: 100%; height: auto; display: block; }
 
 <!-- CTA -->
 <section class="cta-section">
-  <h2>Ready to Get Started?</h2>
-  <p>Premium digital accounts delivered instantly. Trusted by thousands of customers worldwide.</p>
-  <a href="https://hltx.cc.cd" target="_blank" rel="noopener" class="cta-btn">Shop Now</a>
+  <h2 data-i18n="cta.title">Ready to Get Started?</h2>
+  <p data-i18n="cta.desc">Premium digital accounts delivered instantly. Trusted by thousands of customers worldwide.</p>
+  <a href="https://hltx.cc.cd" target="_blank" rel="noopener" class="cta-btn" data-i18n="cta.btn">Shop Now</a>
 </section>
 
 <!-- Footer -->
@@ -852,22 +874,22 @@ img { max-width: 100%; height: auto; display: block; }
     <div class="footer-top">
       <div class="footer-brand">
         <div class="logo">SEKTV</div>
-        <p>Your trusted source for premium digital accounts and professional web services.</p>
+        <p data-i18n="footer.brand">Your trusted source for premium digital accounts and professional web services.</p>
       </div>
       <div class="footer-links-group">
-        <h4>Quick Links</h4>
-        <a href="https://hltx.cc.cd" target="_blank" rel="noopener">Visit Store</a>
-        <a href="#products">Browse Products</a>
-        <a href="#features">Why Choose Us</a>
+        <h4 data-i18n="footer.links">Quick Links</h4>
+        <a href="https://hltx.cc.cd" target="_blank" rel="noopener" data-i18n="footer.store">Visit Store</a>
+        <a href="#products" data-i18n="footer.browse">Browse Products</a>
+        <a href="#features" data-i18n="footer.why">Why Choose Us</a>
       </div>
       <div class="footer-links-group">
-        <h4>Support</h4>
-        <a href="https://hltx.cc.cd" target="_blank" rel="noopener">Contact Us</a>
-        <a href="https://hltx.cc.cd" target="_blank" rel="noopener">FAQ</a>
+        <h4 data-i18n="footer.support">Support</h4>
+        <a href="https://hltx.cc.cd" target="_blank" rel="noopener" data-i18n="footer.contact">Contact Us</a>
+        <a href="https://hltx.cc.cd" target="_blank" rel="noopener" data-i18n="footer.faq">FAQ</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 SEKTV. All rights reserved.</p>
+      <p>&copy; 2026 SEKTV. <span data-i18n="footer.rights">All rights reserved.</span></p>
       <p><a href="https://hltx.cc.cd" target="_blank" rel="noopener">https://hltx.cc.cd</a></p>
     </div>
   </div>
@@ -898,7 +920,86 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // Init language
+  const saved = localStorage.getItem('sektv_lang');
+  if (saved) setLang(saved);
 });
+
+/* ── i18n ── */
+const i18n = {
+  en: {
+    'nav.shop': 'Shop', 'nav.why': 'Why Us', 'nav.store': 'Visit Store',
+    'hero.eyebrow': 'Premium Digital Accounts', 'hero.title1': 'Digital', 'hero.title2': 'Essentials',
+    'hero.sub': 'Curated selection of premium digital accounts and professional web services. Delivered instantly.',
+    'hero.btn': 'Explore Collection',
+    'stats.cats': 'Categories', 'stats.prods': 'Products', 'stats.opts': 'Options', 'stats.del': 'Delivery',
+    'collection.title': 'The Collection', 'collection.desc': 'Browse our curated selection of premium digital accounts and services',
+    'filter.all': 'All', 'filter.gv': 'GV Numbers', 'filter.gmail': 'Gmail', 'filter.apple': 'Apple ID', 'filter.svc': 'Services',
+    'cat.gv': 'GV Numbers', 'cat.gmail': 'Gmail', 'cat.apple': 'Apple ID', 'cat.svc': 'Services',
+    'p1.title': 'GoogleVoice /GV Premium Number (Transfer)', 'p2.title': 'Apple ID — US / Japan / Korea / HK / Taiwan / China',
+    'p3.title': 'GoogleVoice /GV Tax-Free Premium Number', 'p4.title': 'GoogleVoice /GV AAA Vanity Number',
+    'p5.title': 'GoogleVoice /GV AAABCCC Vanity Number', 'p6.title': 'Gmail Premium Aged Account',
+    'p7.title': 'Gmail Pure Number Account', 'p8.title': 'Gmail 3AAA Pure Number Account',
+    'p9.title': 'Custom Image Hosting — Lifetime Free Setup',
+    'feat.deli.title': 'Instant Delivery', 'feat.deli.desc': 'Automated delivery system ensures you receive your accounts immediately after purchase',
+    'feat.qual.title': 'Premium Quality', 'feat.qual.desc': 'Every account is verified and guaranteed. Free replacement during warranty period',
+    'feat.price.title': 'Best Prices', 'feat.price.desc': 'Direct sourcing means no middlemen. We offer the most competitive prices available',
+    'feat.custom.title': 'Custom Selection', 'feat.custom.desc': 'Choose specific numbers and account details to match your exact requirements',
+    'cta.title': 'Ready to Get Started?', 'cta.desc': 'Premium digital accounts delivered instantly. Trusted by thousands of customers worldwide.',
+    'cta.btn': 'Shop Now',
+    'footer.brand': 'Your trusted source for premium digital accounts and professional web services.',
+    'footer.links': 'Quick Links', 'footer.store': 'Visit Store', 'footer.browse': 'Browse Products', 'footer.why': 'Why Choose Us',
+    'footer.support': 'Support', 'footer.contact': 'Contact Us', 'footer.faq': 'FAQ', 'footer.rights': 'All rights reserved.',
+    'announce': '★ Instant Delivery on All Orders ★ Premium Quality Guaranteed ★ 24/7 Customer Support ★ Best Prices Online',
+  },
+  zh: {
+    'nav.shop': '商品', 'nav.why': '优势', 'nav.store': '进入商城',
+    'hero.eyebrow': '优质数字账号', 'hero.title1': '精选', 'hero.title2': '数字资源',
+    'hero.sub': '严选优质数字账号与专业网站服务，一站式解决，即买即用。',
+    'hero.btn': '浏览全部',
+    'stats.cats': '分类', 'stats.prods': '商品', 'stats.opts': '规格', 'stats.del': '发货',
+    'collection.title': '全部商品', 'collection.desc': '浏览我们严选的优质数字账号与服务',
+    'filter.all': '全部', 'filter.gv': 'GV靓号', 'filter.gmail': '谷歌邮箱', 'filter.apple': '苹果ID', 'filter.svc': '服务类',
+    'cat.gv': 'GV靓号', 'cat.gmail': '谷歌邮箱', 'cat.apple': '苹果ID', 'cat.svc': '服务类',
+    'p1.title': 'GoogleVoice /GV情侣老号靓号', 'p2.title': '苹果ID — 美/日/韩/港/台/中国 Apple账号',
+    'p3.title': 'GoogleVoice /GV免税区老号靓号', 'p4.title': 'GoogleVoice /GV AAA老号靓号',
+    'p5.title': 'GoogleVoice /GV AAABCCC老号靓号', 'p6.title': '谷歌邮箱 普通精选老账号',
+    'p7.title': '谷歌邮箱 纯数字邮箱账号', 'p8.title': '谷歌邮箱 3AAA纯数字靓号',
+    'p9.title': '部署搭建永久免费图床网站',
+    'feat.deli.title': '即时发货', 'feat.deli.desc': '付款后自动发货，无需等待人工处理',
+    'feat.qual.title': '品质保障', 'feat.qual.desc': '每个账号均经过验证，质保期内免费更换',
+    'feat.price.title': '源头价格', 'feat.price.desc': '一手资源直供，无中间商差价，价格更优',
+    'feat.custom.title': '可选靓号', 'feat.custom.desc': '支持自选号码和账号详情，精准匹配需求',
+    'cta.title': '找到你需要的账号了吗？', 'cta.desc': '优质数字账号即买即用，数千用户信赖之选。',
+    'cta.btn': '立即购买',
+    'footer.brand': '您值得信赖的优质数字账号与专业网站服务平台。',
+    'footer.links': '快速链接', 'footer.store': '进入商城', 'footer.browse': '浏览商品', 'footer.why': '为什么选择我们',
+    'footer.support': '客户支持', 'footer.contact': '联系我们', 'footer.faq': '常见问题', 'footer.rights': '保留所有权利。',
+    'announce': '★ 全场即时发货 ★ 品质保障 ★ 24小时在线客服 ★ 超值优惠价格',
+  }
+};
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('sektv_lang', lang);
+  const t = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  // Announcement bar
+  const marqueeSpans = document.querySelectorAll('.announce-bar .marquee span');
+  const announceText = t['announce'];
+  marqueeSpans.forEach(s => s.textContent = announceText);
+  // Label
+  const label = document.getElementById('lang-label');
+  if (label) label.textContent = lang === 'en' ? '中文' : 'EN';
+  // html lang
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+}
+function toggleLang() {
+  setLang(currentLang === 'en' ? 'zh' : 'en');
+}
 </script>
 </body>
 </html>
